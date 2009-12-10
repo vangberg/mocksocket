@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name     = "mocksocket"
-  s.version  = "0.1"
+  s.version  = "0.2"
   s.date     = "2009-12-10"
   s.summary  = "io/tcpsocket mock for testing"
   s.email    = "harry@vangberg.name"

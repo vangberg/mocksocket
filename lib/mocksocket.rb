@@ -9,12 +9,21 @@ class MockSocket
   end
 
   attr_accessor :in, :out
+
   def puts(m) @out.puts(m) end
+
   def print(m) @out.print(m) end
+
   def gets()
     Timeout.timeout(1) {@in.gets}
   end
+
+  def read(length=nil)
+    Timeout.timeout(1) {@in.read(length)}
+  end
+
   def eof?() @in.eof? end
+
   def empty?
     begin
       @in.read_nonblock(1)
