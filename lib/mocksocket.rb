@@ -1,3 +1,5 @@
+require 'timeout'
+
 class MockSocket
   def self.pipe
     socket1, socket2 = new, new
@@ -7,11 +9,11 @@ class MockSocket
   end
 
   attr_accessor :in, :out
+  def puts(m) @out.puts(m) end
+  def print(m) @out.print(m) end
   def gets()
     Timeout.timeout(1) {@in.gets}
   end
-  def puts(m) @out.puts(m) end
-  def print(m) @out.print(m) end
   def eof?() @in.eof? end
   def empty?
     begin

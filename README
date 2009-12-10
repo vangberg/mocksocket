@@ -1,0 +1,51 @@
+mocksocket
+----------
+
+tiny class providing an IO/TCPSocket mock, full
+duplex and everything. mainly useful for testing
+TCPSocket applications.
+
+>> require 'mocksocket'
+>> client, server = MockSocket.pipe #=> [M, M]
+>> client.puts "hello, I'm a client!"
+>> server.gets #=> "hello, I'm a client!\n"
+>> server.puts "welcome, client."
+>> client.gets #=> "welcome, client.\n"
+
+it uses Timeout, so instead of stalled tests, you
+get some timeout exception, if you're trying to
+read from an empty buffer.
+
+methods implemented: #puts, #print, #gets, #eof?
+and the ever-handy #empty?
+
+as well there's tiny test extensions for test/unit:
+
+  require 'mocksocket/test'
+
+  module Test::Unit::Assertions
+    include MockSocket::Assertions
+  end
+
+  def setup
+    @c, @s = MockSocket.pipe
+  end
+
+  def test_empty_buffer
+    assert_empty_buffer @c
+  end
+
+.. and bacon:
+
+  require 'mocksocket/bacon'
+
+  describe "awesome" do
+    before { @c, @s = MockSocket.pipe }
+  end
+
+  should "be empty" do
+    @c.should.be empty_buffer
+  end
+
+that's about it. (c) 2009 harry vangberg and
+released under the MIT license. enjoy.

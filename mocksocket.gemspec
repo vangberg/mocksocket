@@ -12,7 +12,8 @@ Gem::Specification.new do |s|
     "README", 
 		"mocksocket.gemspec", 
 		"lib/mocksocket.rb",
-    "lib/mocksocket/test.rb"
+    "lib/mocksocket/test.rb",
+    "lib/mocksocket/bacon.rb"
   ]
 end
 
