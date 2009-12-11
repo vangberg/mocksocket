@@ -8,21 +8,29 @@ class MockSocket
     [socket1, socket2]
   end
 
+  TIMEOUT = 1
+
+  def timeout(&block)
+    Timeout.timeout(TIMEOUT) {block.call}
+  end
+
   attr_accessor :in, :out
 
   def puts(m) @out.puts(m) end
 
   def print(m) @out.print(m) end
 
-  def gets()
-    Timeout.timeout(1) {@in.gets}
+  def gets
+    timeout {@in.gets}
   end
 
   def read(length=nil)
-    Timeout.timeout(1) {@in.read(length)}
+    timeout {@in.read(length)}
   end
 
-  def eof?() @in.eof? end
+  def eof?
+    timeout {@in.eof?}
+  end
 
   def empty?
     begin
