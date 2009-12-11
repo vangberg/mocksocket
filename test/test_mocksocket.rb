@@ -11,8 +11,8 @@ class TestMockSocket < Test::Unit::TestCase
     @client.puts "hello, server!"
     assert_equal "hello, server!\n", @server.gets
 
-    @client.puts "I'll say more hello."
-    @client.puts "and even more."
+    @client.print "I'll say more hello.\n"
+    @client.print "and even more.\n"
     
     assert_equal "I'll say more hello.\n", @server.gets
     assert_equal "and even more.\n", @server.gets

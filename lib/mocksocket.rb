@@ -1,17 +1,13 @@
 require 'timeout'
 
 class MockSocket
+  TIMEOUT = 1
+
   def self.pipe
     socket1, socket2 = new, new
     socket1.in, socket2.out = IO.pipe
     socket2.in, socket1.out = IO.pipe
     [socket1, socket2]
-  end
-
-  TIMEOUT = 1
-
-  def timeout(&block)
-    Timeout.timeout(TIMEOUT) {block.call}
   end
 
   attr_accessor :in, :out
@@ -39,5 +35,10 @@ class MockSocket
     rescue Errno::EAGAIN
       true
     end
+  end
+
+  private
+  def timeout(&block)
+    Timeout.timeout(TIMEOUT) {block.call}
   end
 end
