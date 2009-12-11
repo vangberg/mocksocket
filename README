@@ -41,10 +41,10 @@ as well there's tiny test extensions for test/unit:
 
   describe "awesome" do
     before { @c, @s = MockSocket.pipe }
-  end
 
-  should "be empty" do
-    @c.should.be empty_buffer
+    should "be empty" do
+      @c.should.be empty_buffer
+    end
   end
 
 that's about it. (c) 2009 harry vangberg and
